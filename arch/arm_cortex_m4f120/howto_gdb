@@ -1,0 +1,38 @@
+arm-none-eabi-gdb bmbs.out
+...
+Reading symbols from bmbs.out...done.
+(gdb) target extended-remote :3333
+Remote debugging using :3333
+0x00000000 in g_pfnVectors ()
+(gdb) monitor reset halt
+adapter speed: RCLK - adaptive
+target state: halted
+target halted due to debug-request, current mode: Thread 
+xPSR: 0x01000000 pc: 0x000004c8 msp: 0x20000200
+(gdb) load
+Loading section .isr_vector, size 0x26c lma 0x0
+Loading section .text, size 0xea0 lma 0x26c
+Loading section .rodata, size 0x189 lma 0x110c
+Start address 0x26c, load size 4757
+Transfer rate: 5 KB/sec, 1585 bytes/write.
+(gdb) monitor reset init
+adapter speed: RCLK - adaptive
+target state: halted
+target halted due to debug-request, current mode: Thread 
+xPSR: 0x01000000 pc: 0x000004c8 msp: 0x20000200
+(gdb) b main
+Breakpoint 1 at 0x26e: file /home/alex/Documents/mySoftware/bmbs/main.c, line 24.
+(gdb) c
+Continuing.
+Note: automatically using hardware breakpoints for read-only addresses.
+
+Breakpoint 1, main () at /home/alex/Documents/mySoftware/bmbs/main.c:24
+24          plat_init();
+(gdb) n
+25          reset_confirm();
+(gdb) n
+26          tick(&time_measurement);
+(gdb) n
+27          set_pin_high(PIN1);
+(gdb) n
+ 
